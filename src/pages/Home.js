@@ -7,7 +7,7 @@ const Home = () => {
 
     return (
         <div className='app-container'>
-            <h2>Trending Movies</h2>
+            <h2 style={{ color: "#000" }}>Trending Movies</h2>
             <SearchBar setMovies={setMovies} />
             <TrendingMovies movies={movies} setMovies={setMovies} />
         </div>

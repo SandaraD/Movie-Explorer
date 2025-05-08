@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import MovieCard from "./MovieCard";
+// import './TrendingMovies.css';
 
 const TrendingMovies = ({ movies, setMovies }) => {
     const [trendingMovies, setTrendingMovies] = useState([]);
@@ -13,7 +15,7 @@ const TrendingMovies = ({ movies, setMovies }) => {
                     },
                 });
                 setTrendingMovies(response.data.results);
-                
+
                 // Set the default movies to trending if no search term
                 if (movies.length === 0) {
                     setMovies(response.data.results);
@@ -28,12 +30,8 @@ const TrendingMovies = ({ movies, setMovies }) => {
 
     return (
         <div className="movie-grid">
-            {movies.map(movie => (
-                <div key={movie.id} className="movie-card">
-                    <img src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`} alt={movie.title} />
-                    <h3>{movie.title}</h3>
-                    <p>{movie.release_date}</p>
-                </div>
+            {movies.map((movie) => (
+                <MovieCard key={movie.id} movie={movie} />
             ))}
         </div>
     );
