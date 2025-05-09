@@ -19,8 +19,8 @@ export const ThemeContextProvider = ({ children }) => {
                         main: "#f50057",
                     },
                     background: {
-                        default: grey[900],
-                        paper: grey[700],
+                        default: grey[800],
+                        paper: grey[600],
                     },
                     text: {
                         primary: "#ffffff",
