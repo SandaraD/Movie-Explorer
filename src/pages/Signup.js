@@ -1,5 +1,6 @@
+// Signup.js
 import React, { useState } from 'react';
-import { TextField, Button, Container, Paper, Typography, Link } from '@mui/material';
+import { TextField, Button, Container, Paper, Typography, Link, Alert } from '@mui/material';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import { auth } from '../firebase';
@@ -7,15 +8,43 @@ import { auth } from '../firebase';
 const Signup = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [successMessage, setSuccessMessage] = useState('');
+    const [errorMessage, setErrorMessage] = useState('');
     const navigate = useNavigate();
 
     const handleSignup = async (e) => {
         e.preventDefault();
+        setSuccessMessage('');
+        setErrorMessage('');
+
+        if (!email || !password) {
+            setErrorMessage("Please fill in all the fields.");
+            return;
+        }
+
         try {
             await createUserWithEmailAndPassword(auth, email, password);
-            navigate('/');
+            setSuccessMessage("Account created successfully! Redirecting to homepage...");
+            
+            // Redirect after 2 seconds
+            setTimeout(() => {
+                navigate('/');
+            }, 2000);
         } catch (error) {
-            alert(error.message);
+            console.error("Signup Error:", error.message);
+            switch (error.code) {
+                case 'auth/email-already-in-use':
+                    setErrorMessage("The email address is already in use by another account.");
+                    break;
+                case 'auth/invalid-email':
+                    setErrorMessage("Please enter a valid email address.");
+                    break;
+                case 'auth/weak-password':
+                    setErrorMessage("Password should be at least 6 characters.");
+                    break;
+                default:
+                    setErrorMessage("Something went wrong. Please try again later.");
+            }
         }
     };
 
@@ -25,6 +54,27 @@ const Signup = () => {
                 <Typography variant="h4" gutterBottom align="center" sx={{ color: "#f50057", fontWeight: "bold" }}>
                     Signup
                 </Typography>
+
+                {/* Success Message */}
+                {successMessage && (
+                    <Alert 
+                        severity="success" 
+                        sx={{ marginBottom: 2, backgroundColor: "#2e7d32", color: "#fff", borderRadius: "8px" }}
+                    >
+                        {successMessage}
+                    </Alert>
+                )}
+
+                {/* Error Message */}
+                {errorMessage && (
+                    <Alert 
+                        severity="error" 
+                        sx={{ marginBottom: 2, backgroundColor: "#d32f2f", color: "#fff", borderRadius: "8px" }}
+                    >
+                        {errorMessage}
+                    </Alert>
+                )}
+
                 <form onSubmit={handleSignup}>
                     <TextField
                         fullWidth
@@ -53,6 +103,7 @@ const Signup = () => {
                         Signup
                     </Button>
                 </form>
+                
                 <Typography variant="body2" align="center" sx={{ marginTop: 2, color: "#ccc" }}>
                     Already have an account? <Link href="/login" sx={{ color: "#f50057" }}>Login here</Link>
                 </Typography>
