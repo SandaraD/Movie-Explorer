@@ -49,25 +49,34 @@ const SearchBar = ({ setMovies }) => {
 
     return (
         <form onSubmit={handleSearch} style={{ display: "flex", marginBottom: "20px" }}>
-            <TextField 
+            <TextField
                 fullWidth
                 variant="outlined"
                 placeholder="Search for a movie"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 InputProps={{
+                    style: {
+                        backgroundColor: "#fff",
+                        color: "#000",  // Input text color
+                    },
                     endAdornment: (
                         <InputAdornment position="end">
                             {searchTerm && (
-                                <IconButton onClick={handleClear}>
+                                <IconButton onClick={handleClear} sx={{ color: "#000" }}>
                                     <ClearIcon />
                                 </IconButton>
                             )}
-                            <IconButton type="submit">
+                            <IconButton type="submit" sx={{ color: "#000" }}>
                                 <SearchIcon />
                             </IconButton>
                         </InputAdornment>
                     ),
+                }}
+                inputProps={{
+                    style: {
+                        color: "#000",  // Text color for typed input
+                    },
                 }}
                 sx={{
                     backgroundColor: "#fff",

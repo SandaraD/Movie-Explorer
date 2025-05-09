@@ -52,3 +52,11 @@ body {
     color: #666;
     margin: 0 10px 10px;
 }
+
+body {
+    transition: background-color 0.5s, color 0.5s;
+}
+
+h3, h2, h4, h5, h6, p, span, a {
+    transition: color 0.5s;
+}

@@ -1,0 +1,36 @@
+/* .actor-card {
+    text-align: center;
+    background-color: #222;
+    padding: 10px;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    color: #fff;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.actor-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+} */
+
+.actor-card {
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.actor-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.5);
+}
+
+@media (max-width: 600px) {
+    .actor-card {
+        margin-bottom: 10px;
+    }
+}
+
+.actor-image {
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
