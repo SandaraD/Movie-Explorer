@@ -1,7 +1,7 @@
 #🎥Movie Explorer WebApp
 
-### **Vercel Link**
-# Deployment
+
+# Deployment - Vercel Link
 https://movie-explorer-plum.vercel.app/
 
 A modern responsive movie explorer web app built with **React** , **Firebase Authentication**, **TMDb API**, and **Material UI**. This App allows users to search for movies, view trending movies, add to favorites and explore detailed movie information with a user-friendly design.
