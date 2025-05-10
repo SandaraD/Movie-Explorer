@@ -4,15 +4,16 @@ A modern responsive movie explorer web app built with **React** , **Firebase Aut
 
 ---
 
-## Features
--**User Authentication** (Signup, Login, Logout) using Firebase Authentication
--**Responsive Design** with Material UI
--**Dark/ Light theme toggle**
--**Search for movies** using TMDb API
--**Trending movies** section
--**Favorite movies** section
--**Detailed movie information** with cast, trailer, and more
--**Last searched movies** saved locally
+## **Features**
+- **User Authentication** (Signup, Login, Logout) using Firebase Authentication  
+- **Responsive Design** with Material UI  
+- **Dark/ Light theme toggle**  
+- **Search for movies** using TMDb API  
+- **Trending movies** section  
+- **Favorite movies** section  
+- **Detailed movie information** with cast, trailer, and more  
+- **Last searched movies** saved locally  
+
 
 ---
 
@@ -20,7 +21,7 @@ A modern responsive movie explorer web app built with **React** , **Firebase Aut
 
 ### Prerequisites
 - Node.js
--Firebase Project (With authentixation enabled)
+-Firebase Project (With authentication enabled)
 -TMDb API Key
 -React
 -Material UI
