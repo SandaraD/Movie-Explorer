@@ -49,71 +49,78 @@ npm start
 
 This will start the app in development mode at http://localhost:3000.
 
-## **Project Structure**
+---  
+## **Project Structure** 
 - **/src**
   - **/components**
-    - **NavBar.js**: The navigation bar component
-    - **SearchBar.js**: The search bar component
-    - **TrendingMovies.js**: The trending movies section component
-    - **MovieCard.js**: The movie card component
-    - **MovieDetails.js**: The movie details component
+    - **NavBar.js** - The navigation bar component
+    - **SearchBar.js** - The search bar component
+    - **TrendingMovies.js** - The trending movies section component
+    - **MovieCard.js** - The movie card component
+    - **MovieDetails.js** - The movie details component
   - **/context**
-    - **ThemeContext.js**: The theme context provider
-    - **MovieContext.js**: The movie context provider
+    - **ThemeContext.js** - The theme context provider
+    - **MovieContext.js** - The movie context provider
   - **/pages**
-    - **Home.js**: The home page component
-    - **FavoritesPage.js**: The favorites page component
-    - **Login.js**: The login page component
-    - **Signup.js**: The signup page component
+    - **Home.js** - The home page component
+    - **FavoritesPage.js** - The favorites page component
+    - **Login.js** - The login page component
+    - **Signup.js** - The signup page component
   - **/styles**
-    - **App.css**: The global styles for the app
-    - **Home.css**: The styles for the home page
-    - **MovieCard.css**: The styles for the movie card component
-    - **MovieDetails.css**: The styles for the movie details component
-    - **SearchBar.css**: The styles for the search bar component
-    - **AuthBackground.css**: The styles for the auth background component
-  - **/firebase.js**: The Firebase configuration file
-  - **/index.js**: The main entry point for the app
+    - **App.css** - The global styles for the app
+    - **Home.css** - The styles for the home page
+    - **MovieCard.css** - The styles for the movie card component
+    - **MovieDetails.css** - The styles for the movie details component
+    - **SearchBar.css** - The styles for the search bar component
+    - **AuthBackground.css** - The styles for the auth background component
+  - **/firebase.js** - The Firebase configuration file
+  - **/index.js** - The main entry point for the app
+
 - **/public**
   - **/assets**
-    - **background.jpg**: The background image for the app
-  - **/index.html**: The HTML file for the app
+    - **background.jpg** - The background image for the app
+  - **/index.html** - The HTML file for the app
+
+---
 
 ## **API Integration**
-- **TMDb API**: Used for fetching movie data  
-- **Firebase Authentication**: Used for user authentication  
+- **TMDb API** - Used for fetching movie data  
+- **Firebase Authentication** - Used for user authentication  
+
+---
 
 ## **Endpoints Used**
-- Trending Movies: `https://api.themoviedb.org/3/trending/movie/week`  
-- Movie Details: `https://api.themoviedb.org/3/movie/${id}`  
-- Movie Search: `https://api.themoviedb.org/3/search/movie`  
-- Movie Cast: `https://api.themoviedb.org/3/movie/${id}/credits`  
-- Movie Trailer: `https://api.themoviedb.org/3/movie/${id}/videos`  
+- **Trending Movies** - `https://api.themoviedb.org/3/trending/movie/week`  
+- **Movie Details** - `https://api.themoviedb.org/3/movie/${id}`  
+- **Movie Search** - `https://api.themoviedb.org/3/search/movie`  
+- **Movie Cast** - `https://api.themoviedb.org/3/movie/${id}/credits`  
+- **Movie Trailer** - `https://api.themoviedb.org/3/movie/${id}/videos`  
 
 ---
 
 ## **Key Features**
 
-**Authentication**  
+### **Authentication**  
 - Secure user authentication using Firebase Authentication  
 - User can sign up, log in, and log out  
 - User-specific favorites list stored locally  
 
-**Movie Search**  
+### **Movie Search**  
 - Real-time search for movies using TMDb API  
 - Search results are displayed as a grid of movie cards  
 - Infinite scrolling for loading more search results  
 
-**Movie Details**  
+### **Movie Details**  
 - Detailed information about a movie, including cast, trailer, and more  
 
-**Favorites**  
+### **Favorites**  
 - User can add movies to their favorites list  
 - Favorites list is displayed as a grid of movie cards  
 - User can remove movies from their favorites list  
 
-**Dark/ Light Theme**  
+### **Dark/ Light Theme**  
 - User can toggle between dark and light themes  
+
 
 
 ---
