@@ -54,6 +54,7 @@ const MovieDetails = () => {
     if (!movie) return <div style={{ color: "#fff", textAlign: "center", marginTop: "100px" }}>Loading...</div>;
 
     return (
+      // Movie Details Page
       <Container sx={{ padding: 4, color: "#000", maxWidth: "1400px" }}>
         <Button
           variant="contained"

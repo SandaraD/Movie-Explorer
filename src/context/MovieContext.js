@@ -1,105 +1,3 @@
-// // // src/context/MovieContext.js
-// // import React, { createContext, useContext, useState, useEffect } from 'react';
-
-// // // Create the Movie Context
-// // const MovieContext = createContext();
-
-// // export const useMovieContext = () => useContext(MovieContext);
-
-// // export const MovieContextProvider = ({ children }) => {
-// //     const [movies, setMovies] = useState([]);
-// //     const [lastSearch, setLastSearch] = useState('');
-
-// //     // Load the last searched movies from local storage on startup
-// //     useEffect(() => {
-// //         const savedMovies = localStorage.getItem("lastSearchedMovies");
-// //         const savedSearch = localStorage.getItem("lastSearchTerm");
-
-// //         if (savedMovies) {
-// //             setMovies(JSON.parse(savedMovies));
-// //         }
-
-// //         if (savedSearch) {
-// //             setLastSearch(savedSearch);
-// //         }
-// //     }, []);
-
-// //     // Save the current movies and search term to local storage whenever they change
-// //     useEffect(() => {
-// //         if (movies.length > 0) {
-// //             localStorage.setItem("lastSearchedMovies", JSON.stringify(movies));
-// //         }
-
-// //         if (lastSearch) {
-// //             localStorage.setItem("lastSearchTerm", lastSearch);
-// //         }
-// //     }, [movies, lastSearch]);
-
-// //     const updateMovies = (newMovies, searchTerm) => {
-// //         setMovies(newMovies);
-// //         setLastSearch(searchTerm);
-// //     };
-
-// //     return (
-// //         <MovieContext.Provider value={{ movies, setMovies: updateMovies, lastSearch }}>
-// //             {children}
-// //         </MovieContext.Provider>
-// //     );
-// // };
-
-// import React, { createContext, useContext, useState, useEffect } from 'react';
-
-// // Create the Movie Context
-// const MovieContext = createContext();
-
-// export const useMovieContext = () => useContext(MovieContext);
-
-// export const MovieContextProvider = ({ children }) => {
-//     const [movies, setMovies] = useState([]);
-//     const [lastSearch, setLastSearch] = useState("");
-//     const [favorites, setFavorites] = useState([]);
-
-//     // Load the last searched movies and favorites from local storage on startup
-//     useEffect(() => {
-//         const savedMovies = localStorage.getItem("lastSearchedMovies");
-//         const savedSearch = localStorage.getItem("lastSearchTerm");
-//         const savedFavorites = localStorage.getItem("favoriteMovies");
-
-//         if (savedMovies) setMovies(JSON.parse(savedMovies));
-//         if (savedSearch) setLastSearch(savedSearch);
-//         if (savedFavorites) setFavorites(JSON.parse(savedFavorites));
-//     }, []);
-
-//     // Save the current movies, search term, and favorites to local storage whenever they change
-//     useEffect(() => {
-//         if (movies.length > 0) localStorage.setItem("lastSearchedMovies", JSON.stringify(movies));
-//         if (lastSearch) localStorage.setItem("lastSearchTerm", lastSearch);
-//         if (favorites.length > 0) localStorage.setItem("favoriteMovies", JSON.stringify(favorites));
-//     }, [movies, lastSearch, favorites]);
-
-//     const updateMovies = (newMovies, searchTerm) => {
-//         setMovies(newMovies);
-//         setLastSearch(searchTerm);
-//     };
-
-//     const toggleFavorite = (movie) => {
-//         const isFavorite = favorites.some(fav => fav.id === movie.id);
-//         const updatedFavorites = isFavorite 
-//             ? favorites.filter(fav => fav.id !== movie.id)
-//             : [...favorites, movie];
-
-//         setFavorites(updatedFavorites);
-//     };
-
-//     return (
-//         <MovieContext.Provider value={{ movies, setMovies: updateMovies, lastSearch, favorites, toggleFavorite }}>
-//             {children}
-//         </MovieContext.Provider>
-//     );
-// };
-
-
-// src/context/MovieContext.js
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { auth } from '../firebase';
 import { onAuthStateChanged } from 'firebase/auth';
@@ -129,36 +27,81 @@ export const MovieContextProvider = ({ children }) => {
         return () => unsubscribe();
     }, []);
 
+    // Load last searched movies and search term from local storage
+    useEffect(() => {
+        try {
+            const savedMovies = JSON.parse(localStorage.getItem("lastSearchedMovies")) || [];
+            const savedSearch = localStorage.getItem("lastSearchTerm") || "";
+
+            if (Array.isArray(savedMovies)) setMovies(savedMovies);
+            if (typeof savedSearch === "string") setLastSearch(savedSearch);
+        } catch (error) {
+            console.error("Error loading last searched movies:", error);
+        }
+    }, []);
+
+    // Save last searched movies and search term to local storage
+    useEffect(() => {
+        try {
+            if (Array.isArray(movies)) {
+                localStorage.setItem("lastSearchedMovies", JSON.stringify(movies));
+            }
+
+            if (typeof lastSearch === "string") {
+                localStorage.setItem("lastSearchTerm", lastSearch);
+            }
+        } catch (error) {
+            console.error("Error saving last searched movies:", error);
+        }
+    }, [movies, lastSearch]);
+
     // Load favorites from local storage for the current user
     const loadFavorites = (uid) => {
-        const storedFavorites = localStorage.getItem(`favorites_${uid}`);
-        if (storedFavorites) {
-            setFavorites(JSON.parse(storedFavorites));
+        try {
+            const storedFavorites = localStorage.getItem(`favorites_${uid}`);
+            if (storedFavorites) {
+                setFavorites(JSON.parse(storedFavorites));
+            }
+        } catch (error) {
+            console.error("Error loading favorites:", error);
         }
     };
 
     // Save favorites to local storage whenever they change
     useEffect(() => {
-        if (userID) {
-            localStorage.setItem(`favorites_${userID}`, JSON.stringify(favorites));
+        if (userID && Array.isArray(favorites)) {
+            try {
+                localStorage.setItem(`favorites_${userID}`, JSON.stringify(favorites));
+            } catch (error) {
+                console.error("Error saving favorites:", error);
+            }
         }
     }, [favorites, userID]);
 
+    // Add a movie to favorites
     const addFavorite = (movie) => {
-        setFavorites((prevFavorites) => {
-            if (!prevFavorites.some(fav => fav.id === movie.id)) {
-                return [...prevFavorites, movie];
-            }
-            return prevFavorites;
-        });
+        if (!favorites.some(fav => fav.id === movie.id)) {
+            setFavorites((prevFavorites) => [...prevFavorites, movie]);
+        }
     };
 
+    // Remove a movie from favorites
     const removeFavorite = (movieID) => {
         setFavorites((prevFavorites) => prevFavorites.filter(movie => movie.id !== movieID));
     };
 
     return (
-        <MovieContext.Provider value={{ movies, setMovies, lastSearch, setLastSearch, favorites, addFavorite, removeFavorite }}>
+        <MovieContext.Provider 
+            value={{ 
+                movies, 
+                setMovies, 
+                lastSearch, 
+                setLastSearch, 
+                favorites, 
+                addFavorite, 
+                removeFavorite 
+            }}
+        >
             {children}
         </MovieContext.Provider>
     );

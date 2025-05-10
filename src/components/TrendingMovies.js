@@ -2,44 +2,41 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import MovieCard from "./MovieCard";
 import { Grid, Button, Box, CircularProgress } from "@mui/material";
+import { useMovieContext } from "../context/MovieContext";
 
-const TrendingMovies = ({ searchTerm }) => {
-    //State to store list of movies
-    const [movies, setMovies] = useState([]);
-    //state to store current page
+const TrendingMovies = () => {
+    const { movies, setMovies, lastSearch } = useMovieContext();
     const [page, setPage] = useState(1);
-    //state to show loading spinner
     const [loading, setLoading] = useState(false);
-    //state to track if there are more movies to load
     const [hasMore, setHasMore] = useState(true);
 
     // Fetch trending or search results
-    const fetchMovies = async (page) => {
+    const fetchMovies = async (page, searchTerm = '') => {
         setLoading(true);
         try {
             const endpoint = searchTerm
                 ? `https://api.themoviedb.org/3/search/movie`
                 : `https://api.themoviedb.org/3/trending/movie/week`;
 
-
-                //API request paramters
             const params = {
                 api_key: process.env.REACT_APP_TMDB_API_KEY,
                 page,
             };
 
-            //add search query if search term exists
             if (searchTerm) {
                 params.query = searchTerm;
             }
 
-            //fetch data from API
             const response = await axios.get(endpoint, { params });
             const newMovies = response.data.results;
 
-            //set new movies to the existing list
-            setMovies((prevMovies) => [...prevMovies, ...newMovies]);
-            //set hasMore to false if there are no movies to load
+            // Add new movies to existing ones for infinite scrolling
+            if (page > 1) {
+                setMovies((prevMovies) => [...prevMovies, ...newMovies]);
+            } else {
+                setMovies(newMovies);
+            }
+
             setHasMore(newMovies.length > 0);
         } catch (error) {
             console.error("Error fetching movies:", error);
@@ -47,16 +44,15 @@ const TrendingMovies = ({ searchTerm }) => {
         setLoading(false);
     };
 
-    // Initial fetch
+    // Fetch movies on component mount or when search term changes
     useEffect(() => {
-        setMovies([]);
         setPage(1);
-        fetchMovies(1);
-    }, [searchTerm]);
+        fetchMovies(1, lastSearch);
+    }, [lastSearch]);
 
     // Fetch more movies when the page changes
     useEffect(() => {
-        if (page > 1) fetchMovies(page);
+        if (page > 1) fetchMovies(page, lastSearch);
     }, [page]);
 
     return (
@@ -70,14 +66,14 @@ const TrendingMovies = ({ searchTerm }) => {
                 ))}
             </Grid>
 
-                {/* Display loading spinnner while fetching movies */}
+            {/* Display loading spinner while fetching movies */}
             {loading && (
                 <Box sx={{ display: "flex", justifyContent: "center", marginTop: 2 }}>
                     <CircularProgress />
                 </Box>
             )}
 
-            {/* Display load more button if there are more movies to loadd */}
+            {/* Display load more button if there are more movies to load */}
             {hasMore && !loading && (
                 <Box sx={{ display: "flex", justifyContent: "center", marginTop: 4 }}>
                     <Button 

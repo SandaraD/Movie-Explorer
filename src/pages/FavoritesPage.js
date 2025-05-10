@@ -1,32 +1,3 @@
-// import React from 'react';
-// import { useMovieContext } from '../context/MovieContext';
-// import MovieCard from '../components/MovieCard';
-// import { Grid, Container, Typography, Card } from '@mui/material';
-
-// const FavoritesPage = () => {
-//     const { favorites } = useMovieContext();
-
-//     return (
-//         <Container sx={{ padding: 4 }}>
-//             <Typography variant="h3" gutterBottom>
-//                 Your Favorite Movies
-//             </Typography>
-//             <Grid container spacing={3}>
-//                 <Card >
-//                 {favorites.map(movie => (
-//                     <Grid item key={movie.id} xs={12} sm={6} md={4} lg={3}>
-//                         <MovieCard movie={movie} />
-//                     </Grid>
-//                 ))}
-//                 </Card>
-//             </Grid>
-//         </Container>
-//     );
-// };
-
-// export default FavoritesPage;
-
-
 import React from 'react';
 import { useMovieContext } from '../context/MovieContext';
 import MovieCard from '../components/MovieCard';
@@ -40,7 +11,8 @@ const FavoritesPage = () => {
             <Typography variant="h3" gutterBottom sx={{ color: "#f50057", fontWeight: "bold" }}>
                 Your Favorite Movies
             </Typography>
-
+            
+            {/* Display favorite movies */}
             {favorites.length === 0 ? (
                 <Box sx={{ textAlign: "center", marginTop: 4, color: "#666" }}>
                     <Typography variant="h5" gutterBottom>

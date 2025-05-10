@@ -42,6 +42,10 @@ export const ThemeContextProvider = ({ children }) => {
             },
             typography: {
                 fontFamily: 'Arial, sans-serif',
+                h6: {
+                    fontWeight: 700,
+                    color: darkMode ? "#ffffff" : "#000000",
+                },
                 h3: {
                     fontWeight: 700,
                     color: darkMode ? "#ffffff" : "#000000",

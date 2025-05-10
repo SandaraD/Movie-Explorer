@@ -1,6 +1,7 @@
 // Signup.js
 import React, { useState } from 'react';
-import { TextField, Button, Container, Paper, Typography, Link, Alert } from '@mui/material';
+import { TextField, Button, Container, Paper, Typography, Link, Alert, Box } from '@mui/material';
+import MovieFilterIcon from '@mui/icons-material/MovieFilter';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import { auth } from '../firebase';
@@ -51,6 +52,31 @@ const Signup = () => {
     return (
         <Container maxWidth="xs">
             <Paper elevation={5} sx={{ padding: 4, marginTop: 10, borderRadius: "15px", backgroundColor: "#121212" }}>
+            <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+              marginBottom: 3,
+            }}
+          >
+            <MovieFilterIcon
+              fontSize="large"
+              sx={{ color: "#f50057", marginBottom: 1 }}
+            />
+            <Typography
+              variant="h5"
+              sx={{
+                fontWeight: "bold",
+                color: "#fff",
+                letterSpacing: "1px",
+                textAlign: "center",
+              }}
+            >
+              Movie Explorer
+            </Typography>
+          </Box>
                 <Typography variant="h4" gutterBottom align="center" sx={{ color: "#f50057", fontWeight: "bold" }}>
                     Signup
                 </Typography>
