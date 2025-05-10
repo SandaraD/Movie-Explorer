@@ -19,12 +19,13 @@ A modern responsive movie explorer web app built with **React** , **Firebase Aut
 
 ## Getting Started
 
-### Prerequisites
--  Node.js
--  Firebase Project (With authentication enabled)
--  TMDb API Key
--  React
--  Material UI
+### **Prerequisites**
+- Node.js  
+- Firebase Project (With authentication enabled)  
+- TMDb API Key  
+- React  
+- Material UI  
+
 
 ### **Installation**
 Clone the repository and install the dependencies:
@@ -78,41 +79,42 @@ This will start the app in development mode at http://localhost:3000.
     - **background.jpg**: The background image for the app
   - **/index.html**: The HTML file for the app
 
-  ## **API Integration**
-  - **TMDb API**: Used for fetching movie data
-  - **Firebase Authentication**: Used for user authentication
+## **API Integration**
+- **TMDb API**: Used for fetching movie data  
+- **Firebase Authentication**: Used for user authentication  
 
-  ## **Endpoints Used**
-  -Trending Movies: https://api.themoviedb.org/3/trending/movie/week
-  -Movie Details: https://api.themoviedb.org/3/movie/${id}
-  -Movie Search: https://api.themoviedb.org/3/search/movie
-  -Movie Cast: https://api.themoviedb.org/3/movie/${id}/credits
-  -Movie Trailer: https://api.themoviedb.org/3/movie/${id}/videos
+## **Endpoints Used**
+- Trending Movies: `https://api.themoviedb.org/3/trending/movie/week`  
+- Movie Details: `https://api.themoviedb.org/3/movie/${id}`  
+- Movie Search: `https://api.themoviedb.org/3/search/movie`  
+- Movie Cast: `https://api.themoviedb.org/3/movie/${id}/credits`  
+- Movie Trailer: `https://api.themoviedb.org/3/movie/${id}/videos`  
 
 ---
 
 ## **Key Features**
 
-**Authentication**
--Secure user authentication using firebase authentication
--User can sign up, log in, and log out
--User-specific favorites list stored locally
+**Authentication**  
+- Secure user authentication using Firebase Authentication  
+- User can sign up, log in, and log out  
+- User-specific favorites list stored locally  
 
-**Movie Search**
--Real-time search for movies using TMDb API
--Search results are displayed as a grid of movie cards
--Infinite scrolling for loading more search results
+**Movie Search**  
+- Real-time search for movies using TMDb API  
+- Search results are displayed as a grid of movie cards  
+- Infinite scrolling for loading more search results  
 
-**Movie Details**
--Detailed information about a movie, including cast, trailer, and more
+**Movie Details**  
+- Detailed information about a movie, including cast, trailer, and more  
 
-**Favorites**
--User can add movies to their favorites list
--Favorites list is displayed as a grid of movie cards
--User can remove movies from their favorites list
+**Favorites**  
+- User can add movies to their favorites list  
+- Favorites list is displayed as a grid of movie cards  
+- User can remove movies from their favorites list  
 
-**Dark/ Light Theme**
--User can toggle between dark and light themes
+**Dark/ Light Theme**  
+- User can toggle between dark and light themes  
+
 
 ---
 ### **Deployment**
