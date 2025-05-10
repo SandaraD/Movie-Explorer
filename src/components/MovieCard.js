@@ -41,7 +41,7 @@ const MovieCard = ({ movie }) => {
                 }
             }}
         >
-            //Movie poster
+            {/* Movie poster */}
             <CardMedia
                 component="img"
                 image={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
