@@ -20,11 +20,11 @@ A modern responsive movie explorer web app built with **React** , **Firebase Aut
 ## Getting Started
 
 ### Prerequisites
-- Node.js
--Firebase Project (With authentication enabled)
--TMDb API Key
--React
--Material UI
+-  Node.js
+-  Firebase Project (With authentication enabled)
+-  TMDb API Key
+-  React
+-  Material UI
 
 ### **Installation**
 Clone the repository and install the dependencies:
